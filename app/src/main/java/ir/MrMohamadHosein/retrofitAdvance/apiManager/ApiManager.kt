@@ -21,6 +21,10 @@ class ApiManager {
                 val oldRequest = it.request()
 
                 val newRequest = oldRequest.newBuilder()
+
+
+                /*  Baraye ezafekardan Authorization be header   */
+
                 newRequest.addHeader("Authorization" , "1ad698149ASD6F51ads65f4as4sa6f4")
 
                 it.proceed( newRequest.build() )
@@ -64,6 +68,23 @@ class ApiManager {
             }
 
         } )
+
+    }
+
+
+    fun getUsersSorted(callback: ApiCallback<List<User>>){
+
+
+        apiService.getUsersSorted("desc").enqueue(object :Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                val body = response.body()!!
+                callback.onSuccess(body)            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                val message = t.message!!
+                callback.onError(message)            }
+
+        })
 
     }
 

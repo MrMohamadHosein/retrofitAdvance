@@ -24,11 +24,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.btnGetData.setOnClickListener {
+      /*  binding.btnGetData.setOnClickListener {
             apiManager.getUsers(object : ApiManager.ApiCallback<List<User>> {
                 override fun onSuccess(data: List<User>) {
                     Log.v("testApi", data.toString())
-
 
                     data.forEach {
 
@@ -36,16 +35,69 @@ class MainActivity : AppCompatActivity() {
                         Log.d("testApi", it.phone)
 
                     }
-
-
-
                 }
 
                 override fun onError(errorMessage: String) {
                     Log.v("testApi", errorMessage)
                 }
             })
+        }*/
+
+
+
+
+
+
+        binding.btnGetData.setOnClickListener {
+
+
+
+            apiManager.getUsers(object : ApiManager.ApiCallback<List<User>> {
+                override fun onSuccess(data: List<User>) {
+
+                    data.forEach {
+
+                        Log.d("getUsers", it.name)
+
+                    }
+                }
+
+                override fun onError(errorMessage: String) {
+                    Log.v("getUsers", errorMessage)
+                }
+            })
+
+
+
+
+
+
+            apiManager.getUsersSorted(object : ApiManager.ApiCallback<List<User>> {
+                override fun onSuccess(data: List<User>) {
+
+                    data.forEach {
+
+                        Log.d("getUsersSorted", it.name)
+                        //Log.d("testApi", it.phone)
+
+                    }
+                }
+
+                override fun onError(errorMessage: String) {
+                    Log.v("getUsersSorted", errorMessage)
+                }
+            })
         }
+
+
+
+
+
+
+
+
+
+
     }
 
 
